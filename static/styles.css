@@ -1,0 +1,21 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin: 5px 0 2px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="datetime-local"],
+input[type="submit"]

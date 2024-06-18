@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Housing Program</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</head>
+<body>
+    <h1>Housing Program</h1>
+    
+    <h2>Add Owner</h2>
+    <form action="{{ url_for('add_owner') }}" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br>
+        <label for="surname">Surname:</label>
+        <input type="text" id="surname" name="surname" required><br>
+        <label for="national_code">National Code:</label>
+        <input type="text" id="national_code" name="national_code" required><br>
+        <input type="submit" value="Add Owner">
+    </form>
+
+    <h2>Add House</h2>
+    <form action="{{ url_for('add_house') }}" method="post">
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required><br>
+        <label for="state">State:</label>
+        <input type="text" id="state" name="state" required><br>
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" required><br>
+        <label for="room">Room:</label>
+        <input type="number" id="room" name="room" required><br>
+        <label for="measure">Measure:</label>
+        <input type="text" id="measure" name="measure" required><br>
+        <label for="owner_id">Owner National Code:</label>
+        <input type="text" id="owner_id" name="owner_id" required><br>
+        <input type="submit" value="Add House">
+    </form>
+
+    <h2>Sell House</h2>
+    <form action="{{ url_for('sell_house') }}" method="post">
+        <label for="price">Price:</label>
+        <input type="text" id="price" name="price" required><br>
+        <label for="house_id">House ID:</label>
+        <input type="number" id="house_id" name="house_id" required><br>
+        <label for="buyer">Buyer:</label>
+        <input type="text" id="buyer" name="buyer" required><br>
+        <label for="date_time">Date and Time:</label>
+        <input type="datetime-local" id="date_time" name="date_time" required><br>
+        <input type="submit" value="Sell House">
+    </form>
+
+    <h2>Houses</h2>
+    <ul>
+        {% for house in houses %}
+        <li>{{ loop.index }}: {{ house.get_address() }}, {{ house.get_state() }}, {{ house.get_city() }}, Room: {{ house.get_room() }}, Measure: {{ house.get_measure() }}, Owner: {{ house.get_owner().get_name() }} {{ house.get_owner().get_surname() }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Owners</h2>
+    <ul>
+        {% for owner in owners %}
+        <li>{{ owner.get_national_code() }}: {{ owner.get_name() }} {{ owner.get_surname() }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Sales</h2>
+    <ul>
+        {% for sell in sells %}
+        <li>{{ loop.index }}: Price: {{ sell.get_price() }}, House: {{ sell.get_house().get_address() }}, Buyer: {{ sell.get_buyer() }}, Date and Time: {{ sell.get_date_time() }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
